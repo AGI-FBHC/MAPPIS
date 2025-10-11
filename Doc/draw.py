@@ -74,9 +74,25 @@ def plot_matrix_3x3(data, metric="auroc"):
             x, auroc, auprc = data[label]["hidden dim"]
             y = auroc if metric == "auroc" else auprc
             ax.plot(x, y, marker="o", linestyle="-", color=color, label=label)
-            for xi, yi in zip(x, y):
-                ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
-        ax.set_title("hidden dim - {}".format(metric.upper()))
+            for i,(xi, yi) in enumerate(zip(x, y)):
+                if color == "tab:green":
+                    if i==1:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                    elif i==0:
+                        ax.text(xi+20, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    else:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                elif color == "tab:orange":
+                    if i == 2:
+                        ax.text(xi - 20, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                    else:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                else:
+                    if i == 0:
+                        ax.text(xi + 20, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    else:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+        ax.set_title("hidden dim")
         ax.set_xlabel("Value")
         ax.set_ylabel(metric.upper())
         ax.grid(True, linestyle="--", alpha=0.5)
@@ -88,9 +104,31 @@ def plot_matrix_3x3(data, metric="auroc"):
             x, auroc, auprc = data[label]["gcnii layers"]
             y = auroc if metric == "auroc" else auprc
             ax.plot(x, y, marker="o", linestyle="-", color=color, label=label)
-            for xi, yi in zip(x, y):
-                ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
-        ax.set_title("gcnii layers - {}".format(metric.upper()))
+            for i,(xi, yi) in enumerate(zip(x, y)):
+                if color == "tab:orange":
+                    if i == 0:
+                        ax.text(xi+0.5, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    elif i== 2:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                    elif i==3:
+                        ax.text(xi-0.5, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                    else:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                elif color == "tab:green":
+                    if i == 0:
+                        ax.text(xi+0.5, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    elif i==3:
+                        ax.text(xi-0.5, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    else:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                else:
+                    if i == 0:
+                        ax.text(xi+0.5, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    elif i==3:
+                        ax.text(xi-0.5, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    else:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+        ax.set_title("gcnii layers")
         ax.set_xlabel("Value")
         ax.set_ylabel(metric.upper())
         ax.grid(True, linestyle="--", alpha=0.5)
@@ -103,9 +141,31 @@ def plot_matrix_3x3(data, metric="auroc"):
             x, auroc, auprc = data[label]["ha layers"]
             y = auroc if metric == "auroc" else auprc
             ax.plot(x, y, marker="o", linestyle="-", color=color, label=label)
-            for xi, yi in zip(x, y):
-                ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
-        ax.set_title("ha layers - {}".format(metric.upper()))
+            for i,(xi, yi) in enumerate(zip(x, y)):
+                if color == "tab:orange":
+                    if i == 0:
+                        ax.text(xi + 0.1, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    elif i == 1:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                    elif i == 2:
+                        ax.text(xi - 0.1, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                    else:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                elif color == "tab:green":
+                    if i == 0:
+                        ax.text(xi + 0.1, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    elif i == 2:
+                        ax.text(xi - 0.1, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    else:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                else:
+                    if i == 0:
+                        ax.text(xi + 0.1, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    elif i == 2:
+                        ax.text(xi - 0.1, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    else:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+        ax.set_title("ha layers")
         ax.set_xlabel("Value")
         ax.set_ylabel(metric.upper())
         ax.grid(True, linestyle="--", alpha=0.5)
@@ -116,14 +176,46 @@ def plot_matrix_3x3(data, metric="auroc"):
         for color, label in zip(colors, labels):
             x, auroc, auprc = data[label]["pseudo-pos"]
             y = auroc if metric == "auroc" else auprc
-            ax.plot(x, y, marker="o", linestyle="-", color=color, label=label)
-            for xi, yi in zip(x, y):
-                ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
-        ax.set_title("pseudo-pos - {}".format(metric.upper()))
+
+            x_map = {"CA": 0, "C": 1, "SC": 2}
+            inv_map = {v: k for k, v in x_map.items()}  # 反向映射回标签
+
+            # 把x字符串转为数值用于绘图
+            x_numeric = [x_map[xi] for xi in x]
+            ax.plot(x_numeric, y, marker="o", linestyle="-", color=color, label=label)
+
+            for i, (xi_str, yi) in enumerate(zip(x, y)):
+                xi = x_map[xi_str]  # 数值横坐标
+                x_offset = 0  # 默认不偏移
+                va="bottom"
+
+                if color == "tab:orange":
+                    if xi_str == "CA":   # 第一个点向右偏移
+                        x_offset = 0.1
+                    elif xi_str == "SC":  # 第三个点向左偏移
+                        x_offset = -0.1
+                        va = "top"
+                elif color == "tab:green":
+                    if xi_str == "CA":   # 第一个点向右偏移
+                        x_offset = 0.1
+                    elif xi_str == "SC":  # 第三个点向左偏移
+                        x_offset = -0.1
+                    else:
+                        va = "top"
+                else:
+                    if xi_str == "CA":   # 第一个点向右偏移
+                        x_offset = 0.1
+                    elif xi_str == "SC":  # 第三个点向左偏移
+                        x_offset = -0.1
+
+                ax.text(xi + x_offset, yi, f"{yi:.3f}", fontsize=14, ha="center", va=va)
+        ax.set_title("pseudo-pos")
         ax.set_xlabel("Value")
         ax.set_ylabel(metric.upper())
         ax.grid(True, linestyle="--", alpha=0.5)
-        ax.legend(loc="center left", bbox_to_anchor=(0, 0.55))
+        ax.legend(loc="center left", bbox_to_anchor=(0, 0.60))
+        ax.set_xticks(list(x_map.values()))
+        ax.set_xticklabels(list(x_map.keys()))
 
         # context r
         ax = axes[4]
@@ -131,9 +223,27 @@ def plot_matrix_3x3(data, metric="auroc"):
             x, auroc, auprc = data[label]["context r"]
             y = auroc if metric == "auroc" else auprc
             ax.plot(x, y, marker="o", linestyle="-", color=color, label=label)
-            for xi, yi in zip(x, y):
-                ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
-        ax.set_title("context r - {}".format(metric.upper()))
+            for i, (xi, yi) in enumerate(zip(x, y)):
+                if color == "tab:orange":
+                    if i == 0:
+                        ax.text(xi + 0.7, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    elif i == 1:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                    elif i == 3:
+                        ax.text(xi - 0.7, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                    else:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                elif color == "tab:green":
+                    if i == 0:
+                        ax.text(xi + 0.7, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    else:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                else:
+                    if i == 0:
+                        ax.text(xi + 0.7, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    else:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+        ax.set_title("context r")
         ax.set_xlabel("Value")
         ax.set_ylabel(metric.upper())
         ax.grid(True, linestyle="--", alpha=0.5)
@@ -145,9 +255,24 @@ def plot_matrix_3x3(data, metric="auroc"):
             x, auroc, auprc = data[label]["map cutoff"]
             y = auroc if metric == "auroc" else auprc
             ax.plot(x, y, marker="o", linestyle="-", color=color, label=label)
-            for xi, yi in zip(x, y):
-                ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
-        ax.set_title("map cutoff - {}".format(metric.upper()))
+            for i, (xi, yi) in enumerate(zip(x, y)):
+                if color == "tab:orange":
+                    if i == 1:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                    else:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                elif color == "tab:green":
+                    if i == 0:
+                        ax.text(xi + 0.5, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    elif i == 2:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                    elif i == 5:
+                        ax.text(xi - 0.5, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                    else:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                else:
+                    ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+        ax.set_title("map cutoff")
         ax.set_xlabel("Value")
         ax.set_ylabel(metric.upper())
         ax.grid(True, linestyle="--", alpha=0.5)
@@ -159,13 +284,26 @@ def plot_matrix_3x3(data, metric="auroc"):
             x, auroc, auprc = data[label]["dropout"]
             y = auroc if metric == "auroc" else auprc
             ax.plot(x, y, marker="o", linestyle="-", color=color, label=label)
-            for xi, yi in zip(x, y):
-                ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
-        ax.set_title("dropout - {}".format(metric.upper()))
+            for i, (xi, yi) in enumerate(zip(x, y)):
+                if color == "tab:orange":
+                    if i == 0:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                    else:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                elif color == "tab:green":
+                    ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                else:
+                    if i == 0:
+                        ax.text(xi+0.02, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                    elif i == 5:
+                        ax.text(xi-0.02, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    else:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+        ax.set_title("dropout")
         ax.set_xlabel("Value")
         ax.set_ylabel(metric.upper())
         ax.grid(True, linestyle="--", alpha=0.5)
-        ax.legend(loc="center right", bbox_to_anchor=(1, 0.70))
+        ax.legend(loc="center left", bbox_to_anchor=(0, 0.2))
 
         # α
         ax = axes[7]
@@ -173,9 +311,25 @@ def plot_matrix_3x3(data, metric="auroc"):
             x, auroc, auprc = data[label]["α"]
             y = auroc if metric == "auroc" else auprc
             ax.plot(x, y, marker="o", linestyle="-", color=color, label=label)
-            for xi, yi in zip(x, y):
-                ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
-        ax.set_title("α - {}".format(metric.upper()))
+            for i, (xi, yi) in enumerate(zip(x, y)):
+                if color == "tab:orange":
+                    if i == 0:
+                        ax.text(xi+0.02, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                    elif i == 1:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                    else:
+                        ax.text(xi-0.02, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                elif color == "tab:green":
+                    if i == 0:
+                        ax.text(xi + 0.02, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    else:
+                        ax.text(xi - 0.02, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                else:
+                    if i == 0:
+                        ax.text(xi + 0.02, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    else:
+                        ax.text(xi - 0.02, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+        ax.set_title("α")
         ax.set_xlabel("Value")
         ax.set_ylabel(metric.upper())
         ax.grid(True, linestyle="--", alpha=0.5)
@@ -187,9 +341,25 @@ def plot_matrix_3x3(data, metric="auroc"):
             x, auroc, auprc = data[label]["λ"]
             y = auroc if metric == "auroc" else auprc
             ax.plot(x, y, marker="o", linestyle="-", color=color, label=label)
-            for xi, yi in zip(x, y):
-                ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
-        ax.set_title("λ - {}".format(metric.upper()))
+            for i, (xi, yi) in enumerate(zip(x, y)):
+                if color == "tab:orange":
+                    if i == 0:
+                        ax.text(xi + 0.05, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                    elif i == 1:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                    else:
+                        ax.text(xi - 0.05, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                elif color == "tab:green":
+                    if i == 0:
+                        ax.text(xi + 0.05, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    else:
+                        ax.text(xi - 0.05, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                else:
+                    if i == 0:
+                        ax.text(xi + 0.05, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    else:
+                        ax.text(xi - 0.05, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+        ax.set_title("λ")
         ax.set_xlabel("Value")
         ax.set_ylabel(metric.upper())
         ax.grid(True, linestyle="--", alpha=0.5)
@@ -202,17 +372,25 @@ def plot_matrix_3x3(data, metric="auroc"):
             x, auroc, auprc = data[label]["hidden dim"]
             y = auroc if metric == "auroc" else auprc
             ax.plot(x, y, marker="o", linestyle="-", color=color, label=label)
-            # 根据颜色或标签单独调整文字位置
-            if color == "tab:blue":  # blue 数字写上面
-                va = "bottom"
-            elif color == "tab:green":  # green 数字写下面
-                va = "top"
-            else:
-                va = "bottom"  # 默认
-
-            for xi, yi in zip(x, y):
-                ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va=va)
-        ax.set_title("hidden dim - {}".format(metric.upper()))
+            for i, (xi, yi) in enumerate(zip(x, y)):
+                if color == "tab:orange":
+                    if i == 0:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    elif i == 1:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                    else:
+                        ax.text(xi - 20, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                elif color == "tab:green":
+                    if i == 0:
+                        ax.text(xi + 20, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                    else:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                else:
+                    if i == 0:
+                        ax.text(xi + 20, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    else:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+        ax.set_title("hidden dim")
         ax.set_xlabel("Value")
         ax.set_ylabel(metric.upper())
         ax.grid(True, linestyle="--", alpha=0.5)
@@ -224,9 +402,33 @@ def plot_matrix_3x3(data, metric="auroc"):
             x, auroc, auprc = data[label]["gcnii layers"]
             y = auroc if metric == "auroc" else auprc
             ax.plot(x, y, marker="o", linestyle="-", color=color, label=label)
-            for xi, yi in zip(x, y):
-                ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
-        ax.set_title("gcnii layers - {}".format(metric.upper()))
+            for i, (xi, yi) in enumerate(zip(x, y)):
+                if color == "tab:orange":
+                    if i == 0:
+                        ax.text(xi+0.5, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    elif i == 2:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                    elif i == 3:
+                        ax.text(xi-0.5, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                    else:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                elif color == "tab:green":
+                    if i == 0:
+                        ax.text(xi+0.5, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    elif i == 2:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    elif i == 3:
+                        ax.text(xi-0.5, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    else:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                else:
+                    if i == 0:
+                        ax.text(xi + 0.5, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    elif i == 3:
+                        ax.text(xi - 0.5, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    else:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+        ax.set_title("gcnii layers")
         ax.set_xlabel("Value")
         ax.set_ylabel(metric.upper())
         ax.grid(True, linestyle="--", alpha=0.5)
@@ -239,17 +441,29 @@ def plot_matrix_3x3(data, metric="auroc"):
             x, auroc, auprc = data[label]["ha layers"]
             y = auroc if metric == "auroc" else auprc
             ax.plot(x, y, marker="o", linestyle="-", color=color, label=label)
-            # 根据颜色或标签单独调整文字位置
-            if color == "tab:blue":  # blue 数字写上面
-                va = "top"
-            elif color == "tab:green":  # green 数字写下面
-                va = "bottom"
-            else:
-                va = "bottom"  # 默认
-
-            for xi, yi in zip(x, y):
-                ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va=va)
-        ax.set_title("ha layers - {}".format(metric.upper()))
+            for i, (xi, yi) in enumerate(zip(x, y)):
+                if color == "tab:orange":
+                    if i == 0:
+                        ax.text(xi + 0.1, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    elif i == 1:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                    elif i == 2:
+                        ax.text(xi - 0.1, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                elif color == "tab:green":
+                    if i == 0:
+                        ax.text(xi + 0.1, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    elif i == 2:
+                        ax.text(xi - 0.1, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    else:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                else:
+                    if i == 0:
+                        ax.text(xi + 0.1, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                    elif i == 2:
+                        ax.text(xi - 0.1, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                    else:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+        ax.set_title("ha layers")
         ax.set_xlabel("Value")
         ax.set_ylabel(metric.upper())
         ax.grid(True, linestyle="--", alpha=0.5)
@@ -260,14 +474,45 @@ def plot_matrix_3x3(data, metric="auroc"):
         for color, label in zip(colors, labels):
             x, auroc, auprc = data[label]["pseudo-pos"]
             y = auroc if metric == "auroc" else auprc
-            ax.plot(x, y, marker="o", linestyle="-", color=color, label=label)
-            for xi, yi in zip(x, y):
-                ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
-        ax.set_title("pseudo-pos - {}".format(metric.upper()))
+            x_map = {"CA": 0, "C": 1, "SC": 2}
+            inv_map = {v: k for k, v in x_map.items()}  # 反向映射回标签
+
+            # 把x字符串转为数值用于绘图
+            x_numeric = [x_map[xi] for xi in x]
+            ax.plot(x_numeric, y, marker="o", linestyle="-", color=color, label=label)
+
+            for i, (xi_str, yi) in enumerate(zip(x, y)):
+                xi = x_map[xi_str]  # 数值横坐标
+                x_offset = 0  # 默认不偏移
+                va = "bottom"
+
+                if color == "tab:orange":
+                    if xi_str == "CA":  # 第一个点向右偏移
+                        x_offset = 0.1
+                    elif xi_str == "SC":  # 第三个点向左偏移
+                        x_offset = -0.1
+                        va = "top"
+                    else:  # 第三个点向左偏移
+                        va = "top"
+                elif color == "tab:green":
+                    if xi_str == "CA":  # 第一个点向右偏移
+                        x_offset = 0.1
+                    elif xi_str == "SC":  # 第三个点向左偏移
+                        x_offset = -0.1
+                else:
+                    if xi_str == "CA":  # 第一个点向右偏移
+                        x_offset = 0.1
+                    elif xi_str == "SC":  # 第三个点向左偏移
+                        x_offset = -0.1
+
+                ax.text(xi + x_offset, yi, f"{yi:.3f}", fontsize=14, ha="center", va=va)
+        ax.set_title("pseudo-pos")
         ax.set_xlabel("Value")
         ax.set_ylabel(metric.upper())
         ax.grid(True, linestyle="--", alpha=0.5)
         ax.legend(loc="best")
+        ax.set_xticks(list(x_map.values()))
+        ax.set_xticklabels(list(x_map.keys()))
 
         # context r
         ax = axes[4]
@@ -275,9 +520,27 @@ def plot_matrix_3x3(data, metric="auroc"):
             x, auroc, auprc = data[label]["context r"]
             y = auroc if metric == "auroc" else auprc
             ax.plot(x, y, marker="o", linestyle="-", color=color, label=label)
-            for xi, yi in zip(x, y):
-                ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
-        ax.set_title("context r - {}".format(metric.upper()))
+            for i, (xi, yi) in enumerate(zip(x, y)):
+                if color == "tab:orange":
+                    if i == 0:
+                        ax.text(xi + 1, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    elif i == 1:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                    elif i == 3:
+                        ax.text(xi - 1, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    else:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                elif color == "tab:green":
+                    if i == 0:
+                        ax.text(xi + 1, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    else:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                else:
+                    if i == 0:
+                        ax.text(xi + 1, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    else:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+        ax.set_title("context r")
         ax.set_xlabel("Value")
         ax.set_ylabel(metric.upper())
         ax.grid(True, linestyle="--", alpha=0.5)
@@ -289,9 +552,27 @@ def plot_matrix_3x3(data, metric="auroc"):
             x, auroc, auprc = data[label]["map cutoff"]
             y = auroc if metric == "auroc" else auprc
             ax.plot(x, y, marker="o", linestyle="-", color=color, label=label)
-            for xi, yi in zip(x, y):
-                ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
-        ax.set_title("map cutoff - {}".format(metric.upper()))
+            for i, (xi, yi) in enumerate(zip(x, y)):
+                if color == "tab:orange":
+                    if i == 1:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                    else:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                elif color == "tab:green":
+                    if i == 0:
+                        ax.text(xi + 0.4, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    elif i == 2:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                    elif i == 5:
+                        ax.text(xi-0.4, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    else:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                else:
+                    if i == 0:
+                        ax.text(xi + 1, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    else:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+        ax.set_title("map cutoff")
         ax.set_xlabel("Value")
         ax.set_ylabel(metric.upper())
         ax.grid(True, linestyle="--", alpha=0.5)
@@ -303,9 +584,22 @@ def plot_matrix_3x3(data, metric="auroc"):
             x, auroc, auprc = data[label]["dropout"]
             y = auroc if metric == "auroc" else auprc
             ax.plot(x, y, marker="o", linestyle="-", color=color, label=label)
-            for xi, yi in zip(x, y):
-                ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
-        ax.set_title("dropout - {}".format(metric.upper()))
+            for i, (xi, yi) in enumerate(zip(x, y)):
+                if color == "tab:orange":
+                    if i == 0:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                    else:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                elif color == "tab:green":
+                    ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                else:
+                    if i == 0 or i==1:
+                        ax.text(xi + 0.02, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    elif i == 5:
+                        ax.text(xi - 0.02, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    else:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+        ax.set_title("dropout")
         ax.set_xlabel("Value")
         ax.set_ylabel(metric.upper())
         ax.grid(True, linestyle="--", alpha=0.5)
@@ -317,9 +611,25 @@ def plot_matrix_3x3(data, metric="auroc"):
             x, auroc, auprc = data[label]["α"]
             y = auroc if metric == "auroc" else auprc
             ax.plot(x, y, marker="o", linestyle="-", color=color, label=label)
-            for xi, yi in zip(x, y):
-                ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
-        ax.set_title("α - {}".format(metric.upper()))
+            for i, (xi, yi) in enumerate(zip(x, y)):
+                if color == "tab:orange":
+                    if i == 0:
+                        ax.text(xi + 0.02, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                    elif i == 1:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                    else:
+                        ax.text(xi - 0.02, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                elif color == "tab:green":
+                    if i == 0:
+                        ax.text(xi + 0.02, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    else:
+                        ax.text(xi - 0.02, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                else:
+                    if i == 0:
+                        ax.text(xi + 0.02, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    else:
+                        ax.text(xi - 0.02, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+        ax.set_title("α")
         ax.set_xlabel("Value")
         ax.set_ylabel(metric.upper())
         ax.grid(True, linestyle="--", alpha=0.5)
@@ -331,9 +641,25 @@ def plot_matrix_3x3(data, metric="auroc"):
             x, auroc, auprc = data[label]["λ"]
             y = auroc if metric == "auroc" else auprc
             ax.plot(x, y, marker="o", linestyle="-", color=color, label=label)
-            for xi, yi in zip(x, y):
-                ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
-        ax.set_title("λ - {}".format(metric.upper()))
+            for i, (xi, yi) in enumerate(zip(x, y)):
+                if color == "tab:orange":
+                    if i == 0:
+                        ax.text(xi + 0.04, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                    elif i == 1:
+                        ax.text(xi, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                    else:
+                        ax.text(xi - 0.04, yi, f"{yi:.3f}", fontsize=14, ha="center", va="top")
+                elif color == "tab:green":
+                    if i == 0:
+                        ax.text(xi + 0.04, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    else:
+                        ax.text(xi - 0.04, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                else:
+                    if i == 0:
+                        ax.text(xi + 0.04, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+                    else:
+                        ax.text(xi - 0.04, yi, f"{yi:.3f}", fontsize=14, ha="center", va="bottom")
+        ax.set_title("λ")
         ax.set_xlabel("Value")
         ax.set_ylabel(metric.upper())
         ax.grid(True, linestyle="--", alpha=0.5)
@@ -344,12 +670,12 @@ def plot_matrix_3x3(data, metric="auroc"):
         fig.delaxes(axes[j])
 
     plt.tight_layout()
-    plt.savefig(f"{metric}_matrix_3x3.png", dpi=900, bbox_inches="tight")
+    plt.savefig(f"fig.{metric}.png", dpi=900, bbox_inches="tight")
     plt.show()
 
 
 # ==========================
 # 主逻辑
 # ==========================
-plot_matrix_3x3(data, metric="auroc")
+# plot_matrix_3x3(data, metric="auroc")
 plot_matrix_3x3(data, metric="auprc")
