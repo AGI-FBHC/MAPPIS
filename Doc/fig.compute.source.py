@@ -10,6 +10,17 @@ methods = ["DeepPPISP",  "MaSIF-site", "GraphBind","GraphPPIS", "RGN", "AGAT-PPI
 indexs = ["(a)", "(b)", "(c)", "(d)", "(e)", "(f)", "(g)", "(h)", "(i)", "(j)", "(k)", "(l)", "(m)", "(n)", "(o)", "(p)", "(q)", "(r)"]
 # methods = ["D",  "M1", "G1","G2", "R1", "A", "S", "R2", "M2"]
 color =["blue", "skyblue", "royalblue", "lightgreen", "springgreen", "cyan", "deepskyblue", "orange", "red"]
+colors = [
+    '#3B5BA5',
+    '#5F7DB8',
+    '#8FAADC',
+    '#4C9F70',
+    '#7BC8A4',
+    '#4CA1A3',
+    '#9C8ADE',
+    '#D4A72C',
+    '#D9534F',  # MAPPIS
+]
 ylim = [50,500,1000,2000]
 x = np.arange(0,20,1)
 bar_width=0.4
@@ -51,14 +62,14 @@ FLOPs=[
 
 
 plt.rcParams.update({'font.size': 18})
-plt.subplots(4,3, figsize=(24,24))
+plt.subplots(4,3, figsize=(15,20))
 
 for i in range(3):
     plt.subplot(4,3, i+1)
-    plt.bar(methods, cpu_occ[i], width=bar_width, color=color,alpha=0.5)
+    plt.bar(methods, cpu_occ[i], width=bar_width, color=colors,alpha=0.5)
     plt.ylim(0, ylim[0])
     for j, value in enumerate(cpu_occ[i]):
-        plt.text(j-0.1,value + 5/200*ylim[0], str(round(value,1))+"%", ha='center')  # 添加文本，调整垂直位置
+        plt.text(j-0.1,value + 5/200*ylim[0], str(round(value,1)), ha='center')  # 添加文本，调整垂直位置
     plt.ylabel('CPU Occupancy (%)', fontsize=lable_size)
     plt.xticks(rotation=45, ha='right')
     plt.xlabel(indexs[i]+" "+datasets[i], fontsize=20)
@@ -67,7 +78,7 @@ for i in range(3):
 
 for i in range(3):
     plt.subplot(4,3, 3+i+1)
-    plt.bar(methods, RAM[i],  width=bar_width, color=color,alpha=0.5)
+    plt.bar(methods, RAM[i],  width=bar_width, color=colors,alpha=0.5)
     for j, value in enumerate(RAM[i]):
         plt.text(j-0.1,value + 5/200*ylim[1], str(round(value)), ha='center')  # 添加文本，调整垂直位置
     plt.ylim(0, ylim[1])
@@ -79,7 +90,7 @@ for i in range(3):
 
 for i in range(3):
     plt.subplot(4,3, 6+i+1)
-    plt.bar(methods, VRAM[i],  width=bar_width, color=color,alpha=0.5)
+    plt.bar(methods, VRAM[i],  width=bar_width, color=colors,alpha=0.5)
     for j, value in enumerate(VRAM[i]):
          plt.text(j-0.1,value + 5/200*ylim[2], str(round(value)), ha='center')  # 添加文本，调整垂直位置
     plt.ylim(0, ylim[2])
@@ -90,7 +101,7 @@ for i in range(3):
     
 for i in range(3):
     plt.subplot(4,3, 9+i+1)
-    plt.bar(methods, FLOPs[i],  width=bar_width, color=color,alpha=0.5)
+    plt.bar(methods, FLOPs[i],  width=bar_width, color=colors,alpha=0.5)
     for j, value in enumerate(FLOPs[i]):
         plt.text(j-0.1,value + 5/200*ylim[3], str(round(value)),ha='center')  # 添加文本，调整垂直位置
     plt.ylim(0, ylim[3])
