@@ -6,8 +6,8 @@ fm.fontManager.addfont('Doc/times/times.ttf')
 plt.rc('font',family='Times New Roman')
 
 datasets =["(a) Train_355-1","(b) Test_60","(c) Test_315-28","(d) BTest_31-6","(e) UTest_31-6","(f) DNA-Train_573", "(g) DNA-Test_129", "(h) RNA-Train_495", "(i) RNA-Test_117"]
-methods = ["DeepPPISP",  "MaSIF-site", "GraphBind","GraphPPIS", "RGN", "AGAT-PPIS", "Spatom", "RGCNPPIS", "MAPPIS"]
-# methods = ["D",  "M1", "G1","G2", "R1", "A", "S", "R2", "M2"]
+# methods = ["DeepPPISP",  "MaSIF-site", "GraphBind","GraphPPIS", "RGN", "AGAT-PPIS", "Spatom", "RGCNPPIS", "MAPPIS"]
+methods = ["DeepPPISP",  "GraphPPIS", "AGAT-PPIS","RGCNPPIS", "GTE-PPIS", "ASCE-PPIS", "MEG-PPIS", "RCLG-PPIS", "MAPPIS"]
 color =["blue", "skyblue", "royalblue", "lightgreen", "springgreen", "cyan", "deepskyblue", "orange", "red"]
 colors = [
     '#3B5BA5',
@@ -20,7 +20,7 @@ colors = [
     '#D4A72C',
     '#D9534F',  # MAPPIS
 ]
-ylim = [320, 50, 200, 30, 30, 550, 100, 500, 80]
+ylim = [340, 50, 200, 30, 30, 600, 100, 550, 80]
 width=0.5
 group_width=6
 bar_width = 0.8
@@ -56,16 +56,18 @@ plt.rcParams.update({'font.size': 18})
 plt.subplots(3,3, figsize=(15,15), dpi=600)
 for i in range(9):
     plt.subplot(3, 3, i+1)
-    plt.bar(methods, data[:,i], width=bar_width,  yerr=errs[:,i],  error_kw=error_attri,color=colors,alpha=0.5)
+    bar_labels =[f'{v:.0f}' for v in (data[:,i])]
+    bars = plt.bar(methods, data[:,i], width=bar_width,color=colors,alpha=0.5)
+    plt.bar_label(bars, labels=bar_labels, padding=3, fontsize=18)
     plt.xticks(rotation=45, ha='right')
     plt.ylabel('Time (s)', fontsize=18)
     plt.ylim(0,ylim[i])
     plt.xlabel(datasets[i], fontsize=20)
-    # plt.title(datasets[i], fontsize=24)
-    # plt.grid()
+    
 
 
 plt.tight_layout()#调整整体空白
 plt.savefig("Doc/fig/fig.compute.time.svg", dpi=600,transparent=True)
 plt.savefig("Doc/fig/fig.compute.time.jpg", dpi=600,transparent=True)
+plt.savefig("Doc/fig/fig.compute.time.png", dpi=600,transparent=True)
 plt.show()

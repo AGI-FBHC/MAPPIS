@@ -6,9 +6,9 @@ fm.fontManager.addfont('/usr/share/fonts/truetype/times.ttf')
 plt.rc('font',family='Times New Roman')
 
 datasets =["Test_60","DNA-Test_129","RNA-Test_117"]
-methods = ["DeepPPISP",  "MaSIF-site", "GraphBind","GraphPPIS", "RGN", "AGAT-PPIS", "Spatom", "RGCNPPIS", "MAPPIS"]
+# methods = ["DeepPPISP",  "MaSIF-site", "GraphBind","GraphPPIS", "RGN", "AGAT-PPIS", "Spatom", "RGCNPPIS", "MAPPIS"]
+methods = ["DeepPPISP",  "GraphPPIS", "AGAT-PPIS","RGCNPPIS ", "GTE-PPIS", "ASCE-PPIS", "MEG-PPIS", "RCLG-PPIS", "MAPPIS"]
 indexs = ["(a)", "(b)", "(c)", "(d)", "(e)", "(f)", "(g)", "(h)", "(i)", "(j)", "(k)", "(l)", "(m)", "(n)", "(o)", "(p)", "(q)", "(r)"]
-# methods = ["D",  "M1", "G1","G2", "R1", "A", "S", "R2", "M2"]
 color =["blue", "skyblue", "royalblue", "lightgreen", "springgreen", "cyan", "deepskyblue", "orange", "red"]
 colors = [
     '#3B5BA5',
@@ -114,6 +114,7 @@ for i in range(3):
 
 
 plt.tight_layout()#调整整体空白
+plt.savefig("Doc/fig/fig.compute.space.png",dpi=600,transparent=True)
 plt.savefig("Doc/fig/fig.compute.space.svg",dpi=600,transparent=True)
 plt.savefig("Doc/fig/fig.compute.space.jpg",dpi=600,transparent=True)
 plt.show()

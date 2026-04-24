@@ -43,11 +43,11 @@ axs[1].set_ylabel('AUPRC', fontsize=16)
 axs[1].set_xlabel('(b)', fontsize=18)
 
 # 第三个子图
-x = ['Basic', '+CA', '+LA']
-y = np.array([0.351, 0.451, 0.578])
-bottom = np.array([0.0, y[0], y[1]])
+x = ['Basic','+EA', '+CA', '+LA']
+y = np.array([0.351, 0.429, 0.541, 0.578])
+bottom = np.array([0.0, y[0], y[1], y[2]])
 delta= y-bottom
-errors= np.array([0.012, 0.013, 0.012])
+errors= np.array([0.012, 0.013, 0.012, 0.011])
 bar_labels =[f'+{v:.3f}' for v in (delta)]
 bar_labels[0] = f'{y[0]:.3f}'
 
@@ -62,4 +62,5 @@ axs[2].set_xlabel('(c)', fontsize=18)
 plt.tight_layout()#调整整体空白
 plt.savefig("Doc/fig/fig.ablation.svg",dpi=600,transparent=True)
 plt.savefig("Doc/fig/fig.ablation.png",dpi=600,transparent=True)
+plt.savefig("Doc/fig/fig.ablation.jpg",dpi=600,transparent=True)
 plt.show()
