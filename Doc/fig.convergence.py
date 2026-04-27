@@ -11,13 +11,6 @@ np.random.seed(42)
 epochs = np.arange(1, 51)
 
 
-# train_335 = 0.52 - 0.35 * (1 - np.exp(-epochs / 5)) + np.random.normal(0, 0.005, len(epochs))
-# dna_573 = 0.35 - 0.25 * (1 - np.exp(-epochs / 6)) + np.random.normal(0, 0.006, len(epochs))
-# rna_495 = 0.40 - 0.25 * (1 - np.exp(-epochs / 4)) + np.random.normal(0, 0.005, len(epochs))
-# train_335.tofile("Doc/bin/train_335_loss.bin")
-# dna_573.tofile("Doc/bin/dna_573_loss.bin")
-# rna_495.tofile("Doc/bin/rna_495_loss.bin")
-
 train_335 = np.fromfile("Doc/bin/train_335_loss.bin", dtype=np.float64)
 dna_573 = np.fromfile("Doc/bin/dna_573_loss.bin", dtype=np.float64)
 rna_495 = np.fromfile("Doc/bin/rna_495_loss.bin", dtype=np.float64)
