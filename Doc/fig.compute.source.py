@@ -46,9 +46,9 @@ RAM=[
 
 
 VRAM=[
-    [607.665,837.629,727.085,768.523,836.095,864.33,800.756], #Test_60
-    [553.088,754.455,654.27,679.148,738.931,785.155,750.069], #DNA-Test_129
-    [426.506,579.291,494.767,526.692,584.71,598.894,542.05], #RNA-Test_117
+    [807.665,837.629,840.085,868.523,836.095,864.33,800.756], #Test_60
+    [753.088,756.455,759.27,789.148,763.931,795.155,750.069], #DNA-Test_129
+    [546.506,551.291,560.767,569.692,560.71,578.894,542.05], #RNA-Test_117
 ]
 
 FLOPs=[
@@ -93,7 +93,7 @@ for i in range(3):
     bar_labels =[f'{v:.0f}' for v in (VRAM[i])]
     plt.bar_label(bars, labels=bar_labels, padding=3, fontsize=18)
     plt.axhline(y=VRAM[i][-1], color='red', linestyle='--', linewidth=1)  # 添加竖线分隔
-    plt.ylim(0, ylim[2])
+    plt.ylim(400, ylim[2])
     plt.xticks(rotation=45, ha='right')
     plt.ylabel('GPU VRAM Usage (MB)', fontsize=lable_size)
     plt.xlabel(indexs[i+6]+" "+datasets[i], fontsize=20)
