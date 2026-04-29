@@ -4,7 +4,7 @@
 
 
 ## Introduction
-</p align="justify">
+<p align="justify">
 Protein–Protein Interaction Site (PPIS) prediction plays a crucial role in understanding protein functions, elucidating disease mechanisms, and guiding drug discovery. Although traditional experimental methods can provide high-resolution structural information, they are costly and time-consuming, making them unsuitable for large-scale analysis. In recent years, deep learning approaches—particularly stacked Graph Neural Networks (GNNs) and attention mechanisms—have demonstrated superior performance in PPIS prediction. However, existing methods still face challenges such as fragmented multi-scale and hierarchical semantic modeling, as well as efficiency bottlenecks and representation degradation caused by structural complexity. To address these issues, we propose MAPPIS, a multi-dimensional attention-enhanced hierarchical graph neural network framework. MAPPIS jointly models intra-layer, inter-layer and layer-group attention to construct a unified multi-dimensional attention mechanism, enabling effective integration of multi-scale biochemical and structural features. In addition, a hierarchical deep graph architecture is introduced to enhance representation capability while alleviating over-smoothing, and to reduce computational complexity and memory overhead. Experimental results on multiple benchmark datasets demonstrate that MAPPIS consistently achieves state-of-the-art accuracy while exhibiting remarkable computational time and space efficiency compared to leading methods, highlighting its potential in large-scale biological applications.
 </p>
 
@@ -29,6 +29,10 @@ torchaudio                2.3.0
 torchdata                 0.8.0
 torchvision               0.18.0
 ```
+### Environment and Preprocess
+<p align="justify">
+All experiments were repeated ten times, and the reported metrics correspond to the mean and variance computed over these ten runs. In each run, we use a different random seed to initialize the model. The datasets are divided into training and testing sets with a ratio of 8:1. All the models in the study were implemented under the same software and hardware environment. The software environment involved Ubuntu 22.04, Python 3.8, Torch 2.0 and CUDA 11.8. The hardware environment involved an Intel i7 CPU (8 cores, 3.0 GHz), 96 GB of RAM, and an RTX 3090 GPU with 24 GB of VRAM. The protein three-dimensional structures used in this study were predicted from amino acid sequences using AlphaFold 3.0, with the resulting structures saved in PDB format. Visualization was performed using PyMOL 2.0.
+</p>
 
 ## Train and Test
 
@@ -140,16 +144,25 @@ Test mcc:  0.5006401050722077
 Threshold:  0.32
 ```
 
-## Visualization Results
-<img src="Doc/fig/2.jpg" style="width: 48%; height: auto;" />
+## Visual Results
+<div>
+<img src="Doc/fig/fig.parameter.auprc.png" style="width: 48%; height: auto;" />
+<p align="justify">Figure 1: Comparison of 5-fold CV AUPRC across hyperparameter settings for Train 335-1, DNA-Train 573, and RNA-Train 495 datasets.</p>
+</div>
 
+<div>
+<img src="Doc/fig/fig.convergence.png" style="width: 32%; height: auto;" />
+<p align="justify">Figure 2: Convergence Curve on Train_335, DNA_Train_573, and RNA_Train_495.</p>
+</div>
+
+<div>
+<img src="Doc/fig/fig.case.png" style="width: 48%; height: auto;" />
 <p align="justify">
-This figure shows the comparison of binding site prediction performance between MAPPIS and eight existing methods on the same protein sample. Green regions represent non-binding residues;
-Red regions represent predicted binding residues;
-Yellow regions represent predicted binding residues with disagreement among methods;
-Purple regions represent true binding residues.
+Figure 3: Predicted interaction sites for protein 4kt3 chain A: correctly predicted interaction sites (green); interaction sites incorrectly predicted as non-sites (red); non-sites misclassified as interaction sites (yellow); correctly predicted non-interaction sites (gray).
 </p>
+</div>
 
-<img src="Doc/fig/3.jpg" style="width: 48%; height: auto;" />
-
-<p align="justify"> This figure shows multiple visualization styles and rotational views of the 3D structure of the protein.</p>
+<div>
+<img src="Doc/fig/3.jpg" style="width: 40%; height: auto;" />
+<p align="justify"> Figure 4: Protein 4kt3 chain A contains 138 residues, with the interaction sites highlighted in green: (a) four structural representations of the chain: surface, stick, mesh, and cartoon; (b) 3D surface views of the chain rotated at 0°, 90°, 180°, and 270°, providing a more intuitive visualization of its spatial conformation.</p>
+</div>
