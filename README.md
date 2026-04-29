@@ -1,14 +1,14 @@
 <div align="center">
-  <h1>MAPPIS：Efficient and Fast Multi-dimension Attention Protein-Protein Interaction Site Prediction</h1>
+  <h1>MAPPIS：Efficient Multi-dimension Attention Framework for Protein-Protein Interaction Site Prediction</h1>
 </div>
-<img src="Doc/1.jpg" width="100%">  
+
 
 ## Introduction
-(a) Input a protein's 3D structure and its amino acid sequence. Extract sequence information and structural information.    
-(b) Construct a directed weighted graph, where each node represents a residue, each edge represents the connection between nodes, and the weight indicates the strength of the connection.  
-(c) Apply a channel attention mechanism to assign attention weights to features propagated from different layers (hop distances). The SE-Aggregation (Squeeze-and-Excitation) module is used to aggregate neighbor information across different hops and learn their corresponding importance weights 𝑤1,𝑤2,...,𝑤8, which are then combined through a weighted sum.  
-(d) Employ a graph convolutional neural network (GCN) with the incorporation of Initial Residual Connections and Identity Mapping.  
-(e) Overall Workflow of MAPPIS  
+</p align="justify">
+Protein–Protein Interaction Site (PPIS) prediction plays a crucial role in understanding protein functions, elucidating disease mechanisms, and guiding drug discovery. Although traditional experimental methods can provide high-resolution structural information, they are costly and time-consuming, making them unsuitable for large-scale analysis. In recent years, deep learning approaches—particularly stacked Graph Neural Networks (GNNs) and attention mechanisms—have demonstrated superior performance in PPIS prediction. However, existing methods still face challenges such as fragmented multi-scale and hierarchical semantic modeling, as well as efficiency bottlenecks and representation degradation caused by structural complexity. To address these issues, we propose MAPPIS, a multi-dimensional attention-enhanced hierarchical graph neural network framework. MAPPIS jointly models intra-layer, inter-layer and layer-group attention to construct a unified multi-dimensional attention mechanism, enabling effective integration of multi-scale biochemical and structural features. In addition, a hierarchical deep graph architecture is introduced to enhance representation capability while alleviating over-smoothing, and to reduce computational complexity and memory overhead. Experimental results on multiple benchmark datasets demonstrate that MAPPIS consistently achieves state-of-the-art accuracy while exhibiting remarkable computational time and space efficiency compared to leading methods, highlighting its potential in large-scale biological applications.
+</p>
+
+<img src="Doc/fig/fig.mappis.png" width="100%"> 
 
 ## Dependency
 ```markdown
@@ -141,14 +141,15 @@ Threshold:  0.32
 ```
 
 ## Visualization Results
-<img src="Doc/2.jpg" style="width: 48%; height: auto;" />
+<img src="Doc/fig/2.jpg" style="width: 48%; height: auto;" />
 
-This figure shows the comparison of binding site prediction performance between MAPPIS and eight existing methods on the same protein sample.
-Green regions represent non-binding residues;
+<p align="justify">
+This figure shows the comparison of binding site prediction performance between MAPPIS and eight existing methods on the same protein sample. Green regions represent non-binding residues;
 Red regions represent predicted binding residues;
 Yellow regions represent predicted binding residues with disagreement among methods;
 Purple regions represent true binding residues.
+</p>
 
-<img src="Doc/3.jpg" style="width: 48%; height: auto;" />
+<img src="Doc/fig/3.jpg" style="width: 48%; height: auto;" />
 
-This figure shows multiple visualization styles and rotational views of the 3D structure of the protein.
+<p align="justify"> This figure shows multiple visualization styles and rotational views of the 3D structure of the protein.</p>
