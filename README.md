@@ -146,23 +146,23 @@ Threshold:  0.32
 
 ## Visual Results
 <div>
-<img src="Doc/fig/fig.parameter.auprc.png" style="width: 48%; height: auto;" />
+<img src="Doc/fig/fig.parameter.auprc.png" style="width: 80%; height: auto;" />
 <p align="justify">Figure 1: Comparison of 5-fold CV AUPRC across hyperparameter settings for Train 335-1, DNA-Train 573, and RNA-Train 495 datasets.</p>
 </div>
 
 <div>
-<img src="Doc/fig/fig.convergence.png" style="width: 32%; height: auto;" />
+<img src="Doc/fig/fig.convergence.png" style="width: 80%; height: auto;" />
 <p align="justify">Figure 2: Convergence Curve on Train_335, DNA_Train_573, and RNA_Train_495.</p>
 </div>
 
 <div>
-<img src="Doc/fig/fig.case.png" style="width: 48%; height: auto;" />
+<img src="Doc/fig/fig.case.png" style="width: 40%; height: auto;" />
 <p align="justify">
 Figure 3: Predicted interaction sites for protein 4kt3 chain A: correctly predicted interaction sites (green); interaction sites incorrectly predicted as non-sites (red); non-sites misclassified as interaction sites (yellow); correctly predicted non-interaction sites (gray).
 </p>
 </div>
 
 <div>
-<img src="Doc/fig/3.jpg" style="width: 40%; height: auto;" />
+<img src="Doc/fig/3.jpg" style="width: 80%; height: auto;" />
 <p align="justify"> Figure 4: Protein 4kt3 chain A contains 138 residues, with the interaction sites highlighted in green: (a) four structural representations of the chain: surface, stick, mesh, and cartoon; (b) 3D surface views of the chain rotated at 0°, 90°, 180°, and 270°, providing a more intuitive visualization of its spatial conformation.</p>
 </div>
